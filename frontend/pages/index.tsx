@@ -29,9 +29,9 @@ const Home: NextPage = ({ posts }: Props) => {
                 <div className="flex justify-between p-5 bg-white">
                   <div>
                     <p className='text-lg font-bold'>{post.title}</p>
-                    <p className='text-xs'>{post.description} by <span className='font-bold text-pink-500'>{post.title}</span> </p>
+                    <p className='text-xs'>{post.description} by <span className='font-bold text-pink-500 capitalize'>{post.author.name}</span> </p>
                   </div>
-                  <img className="h-12 w-12 rounded-full" src={urlFor(post.mainImage).url()} alt={post.title} />
+                  <img className="h-10 w-10 rounded-full" src={urlFor(post.author.image).url()} alt={post.title} />
                 </div>
               </div>
             </Link>
@@ -51,7 +51,7 @@ export const getServerSideProps = async () => {
     _id,
     title,
     slug,
-    author => {
+    author-> {
     name,
     image
   },
