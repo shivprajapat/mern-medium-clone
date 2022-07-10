@@ -10,7 +10,6 @@ interface Props {
   posts: [Post];
 }
 const Home: NextPage = ({ posts }: Props) => {
-  console.log('posts :>> ', posts);
   return (
     <div className='max-w-7xl mx-auto'>
       <Head>
