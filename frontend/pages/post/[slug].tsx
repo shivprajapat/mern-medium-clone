@@ -42,6 +42,27 @@ const PostDetails = ({ post }: Props) => {
                         }} />
                 </div>
             </article>
+            <hr className="max-w-lg my-5 mx-auto border border-yellow-500" />
+            <form className='flex flex-col p-5 max-w-2xl mx-auto mb-10'>
+                <h3 className="text-sm text-yellow-500">Enjoyed this article</h3>
+                <h4 className="text-3xl mb-2 font-bold">Leave a comment below !</h4>
+                <hr className="mb-5 black" />
+                <div className='mb-5'>
+                <label className='black mb-5' htmlFor="Name">Name</label>
+                <input className='shadow border rounded  mt-3 py-2 px-3 form-input  block w-full ring-yellow-500 outline-none focus:ring' type="text" placeholder="John Application" />
+                </div>
+                <div className='mb-5'>
+                <label className='black' htmlFor="Email">Email</label>
+                <input className='shadow border rounded  mt-3 py-2 px-3 form-input block w-full ring-yellow-500 outline-none focus:ring' type="text" placeholder="John Application" />
+                </div>
+                <div className='mb-5'>
+                <label className='black' htmlFor="Comment">Comment</label>
+                <textarea className='shadow border mt-2 rounded py-2 px-3 form-textarea block w-full ring-yellow-500 outline-none focus:ring' rows={8} placeholder="John Application" />
+               </div>
+               <div className='mt-10'>
+                <button className="block w-full px-4 py-2 rounded-md text-white bg-yellow-500 font-bold">submit</button>
+               </div>
+            </form>
         </main>
     );
 };
