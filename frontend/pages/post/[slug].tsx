@@ -1,10 +1,10 @@
+import { useState } from 'react'
 import { GetStaticProps } from "next";
 import Header from "../../components/Header";
 import { sanityClient, urlFor } from "../../sanity";
 import { Post } from "../../typing";
 import PortableText from "react-portable-text"
 import { SubmitHandler, useForm } from "react-hook-form";
-import { json } from "node:stream/consumers";
 
 interface InputType {
     _id: string;
@@ -16,13 +16,18 @@ interface Props {
     post: Post;
 }
 const PostDetails = ({ post }: Props) => {
+
+    const [submitted, setSubmitted] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<InputType>();
     const onSubmit: SubmitHandler<InputType> = async (data) => {
         await fetch('/api/createComment', {
             method: 'POST',
             body: JSON.stringify(data)
         }).then(() => {
-        }).catch((error) => { console.log(error) })
+            console.log(data);
+
+            setSubmitted(true);
+        }).catch((error) => { console.log(error); setSubmitted(false) })
     }
     return (
         <main>
@@ -59,7 +64,15 @@ const PostDetails = ({ post }: Props) => {
                 </div>
             </article>
             <hr className="max-w-lg my-5 mx-auto border border-yellow-500" />
-            <form className='flex flex-col p-5 max-w-2xl mx-auto mb-10'
+
+
+            {submitted ? (
+               <div className="flex flex-col p-5 mb-10 text-white bg-yellow-500 max-w-xl mx-auto">
+            <h3 className="text-3xl font-bold">Thank you for submitted your comment!</h3>
+            <p>Once it has been approved, it will appear below</p>
+            </div>
+            ) : (
+                <form className='flex flex-col p-5 max-w-2xl mx-auto mb-10'
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <h3 className="text-sm text-yellow-500">Enjoyed this article</h3>
@@ -93,6 +106,8 @@ const PostDetails = ({ post }: Props) => {
                     <button type="submit" className="block w-full px-4 py-2 rounded text-white bg-yellow-500 font-bold hover:bg-yellow-400 focus:shadow-outline focus:outline-none transition duration-150">submit</button>
                 </div>
             </form>
+            )}
+
         </main>
     );
 };
